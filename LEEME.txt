@@ -1,0 +1,9 @@
+SistemaVentas - Semana 12 (WPF, N-Capas, Singleton) - hasta el Paso 9
+
+1) Abre SQL/BDVentas.sql en SSMS (servidor: (localdb)\MSSQLLocalDB) y ejecútalo con F5.
+2) Abre SistemaVentas.sln en Visual Studio.
+3) CapaPresentacion ya es el proyecto de inicio. Presiona F5.
+
+Proyectos: .NET Framework 4.8 (CapaEntidad, CapaDatos, CapaNegocio, CapaPresentacion).
+Si Visual Studio indica que falta el targeting pack de .NET Framework 4.8:
+Visual Studio Installer > Modificar > Componentes individuales > ".NET Framework 4.8 targeting pack".
