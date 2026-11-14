@@ -7,3 +7,8 @@ SistemaVentas - Semana 12 (WPF, N-Capas, Singleton) - hasta el Paso 9
 Proyectos: .NET Framework 4.8 (CapaEntidad, CapaDatos, CapaNegocio, CapaPresentacion).
 Si Visual Studio indica que falta el targeting pack de .NET Framework 4.8:
 Visual Studio Installer > Modificar > Componentes individuales > ".NET Framework 4.8 targeting pack".
+
+Incluye ademas:
+- Titulo "Sistema de Ventas - SENATI" en MainWindow.
+- Opcion Actualizar en las 4 capas: al hacer clic en una fila el formulario pasa a
+  "Editar producto" y el boton a "Actualizar"; con "Nuevo" vuelve al modo nuevo.

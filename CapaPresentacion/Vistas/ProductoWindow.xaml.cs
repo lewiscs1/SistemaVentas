@@ -13,6 +13,9 @@ namespace CapaPresentacion.Vistas
     {
         private readonly ProductoBL _bl = new ProductoBL();
 
+        // 0 = modo "nuevo"; mayor que 0 = estamos editando ese producto
+        private int _idEditando = 0;
+
         public ProductoWindow()
         {
             InitializeComponent();
@@ -44,6 +47,7 @@ namespace CapaPresentacion.Vistas
         {
             // 1) Leer los controles y armar la entidad
             Producto p = new Producto();
+            p.IdProducto = _idEditando;
             p.Nombre = txtNombre.Text.Trim();
             p.Categoria = (cboCategoria.SelectedItem as ComboBoxItem)?.Content.ToString();
             decimal.TryParse(txtPrecio.Text, System.Globalization.NumberStyles.Number,
@@ -52,17 +56,19 @@ namespace CapaPresentacion.Vistas
             p.Stock = (int)sldStock.Value;
             p.Activo = chkActivo.IsChecked == true;
 
-            // 2) Mandar a Negocio
+            bool editando = _idEditando > 0;
+
+            // 2) Mandar a Negocio: actualizar si hay una fila elegida, registrar si no
             try
             {
-                string error = _bl.Registrar(p);
+                string error = editando ? _bl.Actualizar(p) : _bl.Registrar(p);
                 if (error != "")
                 {
                     MessageBox.Show(error, "Validación",
                                     MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
-                MessageBox.Show("Producto guardado", "OK",
+                MessageBox.Show(editando ? "Producto actualizado" : "Producto guardado", "OK",
                                 MessageBoxButton.OK, MessageBoxImage.Information);
                 Limpiar();
                 Listar();
@@ -86,8 +92,13 @@ namespace CapaPresentacion.Vistas
             Limpiar();
         }
 
+        // Vuelve al modo "nuevo producto"
         private void Limpiar()
         {
+            _idEditando = 0;
+            lblFormulario.Text = "Nuevo producto";
+            btnGuardar.Content = "Guardar";
+
             txtNombre.Clear();
             cboCategoria.SelectedIndex = -1;
             txtPrecio.Clear();
@@ -97,11 +108,15 @@ namespace CapaPresentacion.Vistas
             txtNombre.Focus();
         }
 
-        // Al hacer clic en una fila, se copian sus datos al formulario
+        // Al hacer clic en una fila, se copian sus datos al formulario y se pasa a modo "editar"
         private void DgProductos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgProductos.SelectedItem is Producto p)
             {
+                _idEditando = p.IdProducto;
+                lblFormulario.Text = "Editar producto";
+                btnGuardar.Content = "Actualizar";
+
                 txtNombre.Text = p.Nombre;
                 txtPrecio.Text = p.Precio.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
                 sldStock.Value = p.Stock;

@@ -63,5 +63,26 @@ namespace CapaDatos
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public void Actualizar(Producto p)
+        {
+            using (SqlConnection cn = Conexion.Instancia.ObtenerConexion())
+            {
+                string sql = "UPDATE Producto SET Nombre = @nombre, Categoria = @categoria, " +
+                             "Precio = @precio, Stock = @stock, Activo = @activo " +
+                             "WHERE IdProducto = @id";
+
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                cmd.Parameters.AddWithValue("@nombre", p.Nombre);
+                cmd.Parameters.AddWithValue("@categoria", p.Categoria);
+                cmd.Parameters.AddWithValue("@precio", p.Precio);
+                cmd.Parameters.AddWithValue("@stock", p.Stock);
+                cmd.Parameters.AddWithValue("@activo", p.Activo);
+                cmd.Parameters.AddWithValue("@id", p.IdProducto);
+
+                cn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

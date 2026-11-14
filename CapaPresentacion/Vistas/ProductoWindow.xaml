@@ -36,7 +36,7 @@
         <Border Grid.Column="0" Background="#F3F6FA" CornerRadius="8"
                 Padding="15" Margin="0,0,15,0">
             <StackPanel>
-                <TextBlock Text="Nuevo producto" FontSize="18" FontWeight="Bold"
+                <TextBlock x:Name="lblFormulario" Text="Nuevo producto" FontSize="18" FontWeight="Bold"
                            Foreground="#1F4E79" Margin="0,0,0,5"/>
 
                 <Label Content="Nombre"/>
@@ -66,7 +66,7 @@
                           IsChecked="True" Margin="0,12,0,15"/>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Guardar" Click="BtnGuardar_Click"/>
+                    <Button x:Name="btnGuardar" Content="Guardar" Click="BtnGuardar_Click"/>
                     <Button Content="Nuevo" Background="Gray" Click="BtnNuevo_Click"/>
                 </StackPanel>
             </StackPanel>

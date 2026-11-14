@@ -28,7 +28,7 @@
         <!-- CENTRO -->
         <Grid Background="#F3F6FA">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="Sistema de Ventas" FontSize="32" FontWeight="Bold"
+                <TextBlock Text="Sistema de Ventas - SENATI" FontSize="32" FontWeight="Bold"
                            Foreground="#1F4E79" HorizontalAlignment="Center"/>
                 <TextBlock Text="Elige una opción del menú Mantenimiento" FontSize="14"
                            Foreground="Gray" HorizontalAlignment="Center" Margin="0,8,0,0"/>

@@ -13,8 +13,8 @@ namespace CapaNegocio
             return ProductoDAO.Instancia.Listar(nombre.Trim());
         }
 
-        // Devuelve "" si todo salió bien, o el mensaje de error
-        public string Registrar(Producto p)
+        // Devuelve "" si todo está bien, o el mensaje de error
+        private string Validar(Producto p)
         {
             if (string.IsNullOrWhiteSpace(p.Nombre))
                 return "Ingrese el nombre del producto.";
@@ -22,8 +22,29 @@ namespace CapaNegocio
                 return "Seleccione una categoría.";
             if (p.Precio <= 0)
                 return "El precio debe ser mayor a 0.";
+            return "";
+        }
+
+        public string Registrar(Producto p)
+        {
+            string error = Validar(p);
+            if (error != "")
+                return error;
 
             ProductoDAO.Instancia.Insertar(p);
+            return "";
+        }
+
+        public string Actualizar(Producto p)
+        {
+            if (p.IdProducto <= 0)
+                return "Seleccione un producto de la tabla.";
+
+            string error = Validar(p);
+            if (error != "")
+                return error;
+
+            ProductoDAO.Instancia.Actualizar(p);
             return "";
         }
     }
